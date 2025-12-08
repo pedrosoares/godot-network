@@ -48,7 +48,6 @@ impl INode3D for NetworkSyncClientNode3d {
     }
 
     fn ready(&mut self) {
-        godot_print!("godot_ready");
         let position = self.get_position();
         let rotation = self.get_rotation();
         if let Some(ncn) = self.network_client_node.as_mut() {
@@ -122,11 +121,19 @@ impl NetworkSyncClientNode3d {
 
     #[func]
     fn despawn(&mut self) {
+        godot_print!("node:despawn");
         if let Some(ncn) = self.network_client_node.as_mut() {
+            godot_print!(
+                "Packet::DespawnRemoteObject: id: {}, object_id: {}",
+                self.id,
+                self.object_id,
+            );
             ncn.bind_mut().send_message(Packet::DespawnRemoteObject {
                 id: self.id,
                 object_id: self.object_id,
             });
+        } else {
+            godot_error!("No TcpNetworkClientNode set");
         }
     }
 }

@@ -31,10 +31,7 @@ impl INode for TcpNetworkClient {
 
     fn process(&mut self, _delta: f64) {
         let mut counter = 0;
-        loop {
-            if counter > 40 {
-                break;
-            }
+        while counter <= 2 {
             counter += 1;
             if let Some(rx) = &mut self.rx {
                 match rx.recv_timeout(Duration::from_millis(1)) {
@@ -214,9 +211,7 @@ impl INode for TcpNetworkClient {
                         //     }
                         // }
                     }
-                    _ => {
-                        break;
-                    }
+                    _ => counter = 11,
                 }
             }
         }
