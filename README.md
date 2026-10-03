@@ -24,6 +24,10 @@ receiving never block a frame.
   `on_spawn_remote_object`, `on_remote_object_location`, `on_remote_call`,
   `on_voice`, `on_datagram`, `on_chat`, `server_error(code, message)`, and more.
   On UDP signals, the player id comes from the server, so it can't be spoofed.
+  With a server running `--host-migration`, `on_owner_changed(owner_id)` fires
+  when the owner leaves, and `get_match()` reports the new owner. With
+  `--late-join`, joining a started match emits `on_match_started` and an
+  `on_spawn_remote_object` for every live object right after `on_match_joined`.
 
 **`NetworkSyncClientNode3d`** (Node3D)
 

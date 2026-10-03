@@ -91,6 +91,10 @@ impl NetworkClient {
     fn on_player_leaved(player: Gd<Player>);
     #[signal]
     fn on_match_deleted();
+    /// The room's owner left and `owner_id` owns it now (servers running
+    /// with `--host-migration`). `get_match()` already reports the new owner.
+    #[signal]
+    fn on_owner_changed(owner_id: i32);
     #[signal]
     fn on_match_started(map: GString);
     #[signal]
@@ -556,6 +560,12 @@ impl NetworkClient {
                 self.signals()
                     .on_game()
                     .emit(i32::from(kind), &PackedByteArray::from(payload.as_slice()));
+            }
+            Packet::OwnerChanged { room_id, owner_id } => {
+                if let Some(room) = self.room.as_mut().filter(|room| room.id == room_id) {
+                    room.owner_id = owner_id;
+                    self.signals().on_owner_changed().emit(owner_id);
+                }
             }
             // Client-to-server packets and pings.
             _ => {}
