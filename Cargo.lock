@@ -218,7 +218,7 @@ checksum = "f52b00d39961fc5b2736ea853c9cc86238e165017a493d1d5c8eac6bdc4cc273"
 [[package]]
 name = "mw_protocol"
 version = "0.2.0"
-source = "git+https://github.com/pedrosoares/mw-server.git?branch=main#e41ac1b0857cd4b3652e2c210eb3da8acb93ac5f"
+source = "git+https://github.com/pedrosoares/mw-server.git?branch=main#1bc5aa7841edfc354cb624ec8920089c059c88fc"
 dependencies = [
  "postcard",
  "serde",
