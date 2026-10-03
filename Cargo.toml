@@ -1,12 +1,15 @@
 [package]
 name = "godot_network"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-godot = { version = "0.4.2" }
-crossbeam = "0.8.4"
-network_types = { git = "https://github.com/pedrosoares/mw-server.git", branch = "main", subdir = "network-types" }
+godot = "0.4.5"
+crossbeam-channel = "0.5"
+mw_protocol = { git = "https://github.com/pedrosoares/mw-server.git", branch = "main" }
+
+[profile.release]
+lto = "thin"

@@ -1,0 +1,6 @@
+; Test harness for the godot_network extension (see tests/run.sh).
+config_version=5
+
+[application]
+
+config/name="godot_network_tests"
